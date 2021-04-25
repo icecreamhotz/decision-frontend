@@ -36,7 +36,15 @@
             :class="{'active' : $route.name.includes('problems')}"
           >
             <nuxt-link to="/problems" class="nav-text text-decoration-none">
-              ปัญหาที่พบเจอ
+              วิเคราะห์ปัญหา
+            </nuxt-link>
+          </v-toolbar-title>
+          <v-toolbar-title
+            class="d-flex align-center px-3 nav-item"
+            :class="{'active' : $route.name.includes('add-problems')}"
+          >
+            <nuxt-link to="/add-problems" class="nav-text text-decoration-none">
+              เพิ่มปัญหา
             </nuxt-link>
           </v-toolbar-title>
         </div>
@@ -57,48 +65,35 @@
           active-class="active"
         >
           <div class="py-3 background-navbar v-list-item-topper">
-            <v-img src="/images/logo.png" max-width="90" max-height="90" class="logo-navbar" />
+            <nuxt-link to="/" class="primary--text text-decoration-none">
+              Decision System
+            </nuxt-link>
           </div>
           <v-list-item class="mt-3" to="/">
             <v-list-item-icon>
               <v-icon>mdi-home-variant-outline</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>หน้าแรก</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/jobs">
+          <v-list-item to="/news">
             <v-list-item-icon>
               <v-icon>mdi-laptop</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Job</v-list-item-title>
+            <v-list-item-title>ข่าวสาร</v-list-item-title>
           </v-list-item>
 
-          <v-list-item to="/about-us">
+          <v-list-item to="/problems">
             <v-list-item-icon>
               <v-icon>mdi-account-outline</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>About us</v-list-item-title>
+            <v-list-item-title>วิเคราะห์ปัญหา</v-list-item-title>
           </v-list-item>
-
-          <v-list-item to="/contact">
+          <v-list-item to="/add-problems">
             <v-list-item-icon>
-              <v-icon>mdi-contacts-outline</v-icon>
+              <v-icon>mdi-account-outline</v-icon>
             </v-list-item-icon>
-            <v-list-item-title>Contact</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item :class="{'active' : $route.name.includes('resume')}">
-            <v-list-item-icon>
-              <v-icon>mdi-file-document-outline</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>ฝากประวัติ</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-cellphone-iphone</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>085 154 9265</v-list-item-title>
+            <v-list-item-title>เพิ่มปัญหา</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
