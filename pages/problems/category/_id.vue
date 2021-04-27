@@ -64,7 +64,7 @@
                     @click="onClickChoice(problem.childs.find(s => s.is_true), problem)"
                   />
                 </v-col>
-                <v-col :cols="problem.childs.length > 0 ? 6 : 12">
+                <v-col cols="6">
                   <CommonButton
                     text
                     btn-text="ไม่ใช่"
