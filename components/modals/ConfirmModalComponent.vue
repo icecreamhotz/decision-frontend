@@ -30,7 +30,17 @@
         </div>
         <v-divider class="border-gainboro-color" />
         <div class="common-modal__content text-body-1 text-black-color">
-          {{ text }}
+          <div>
+            {{ text }}
+          </div>
+          <a
+            v-if="link"
+            :href="link"
+            target="_blank"
+            class="text-link primary--text"
+          >
+            Download file
+          </a>
         </div>
         <v-divider class="border-gainboro-color" />
         <div class="common-modal__footer">
@@ -65,6 +75,10 @@ export default defineComponent({
       default: ''
     },
     text: {
+      type: String,
+      default: ''
+    },
+    link: {
       type: String,
       default: ''
     },

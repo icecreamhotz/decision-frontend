@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row>
+    <!-- <v-row>
       <v-col cols="12">
         <InputWithValidate
           v-model="search"
@@ -9,7 +9,7 @@
           @enter="$router.push(`/problems?search=${search}`)"
         />
       </v-col>
-    </v-row>
+    </v-row> -->
     <div class="text-h3 spacing-24">
       ข่าวสาร
     </div>

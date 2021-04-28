@@ -70,7 +70,7 @@
                     btn-text="ไม่ใช่"
                     block
                     color="error"
-                    @click="showSolve(problem.title, problem.description, problem.id)"
+                    @click="showSolve(problem.title, problem.description, problem.id, problem.filename)"
                   />
                 </v-col>
               </v-row>
@@ -91,6 +91,7 @@
       v-model="confirmModalValue"
       :title="confirmModalTitle"
       :text="confirmModalText"
+      :link="link"
       @success="onClickSuccess"
     />
   </div>
@@ -123,6 +124,7 @@ export default defineComponent({
       value: 'desc'
     }])
     const lastProblemID = ref<number>(0)
+    const link = ref<string>('')
 
     watch(() => sort.value, () => {
       fetchProblems()
@@ -213,11 +215,12 @@ export default defineComponent({
       }
     }
 
-    const showSolve = (title: string, description: string, id: number) => {
+    const showSolve = (title: string, description: string, id: number, filename: string) => {
       confirmModalValue.value = true
       confirmModalTitle.value = title
       confirmModalText.value = description
       lastProblemID.value = id
+      link.value = filename
     }
 
     return {
@@ -237,7 +240,8 @@ export default defineComponent({
       showSolve,
       confirmModalValue,
       confirmModalTitle,
-      confirmModalText
+      confirmModalText,
+      link
     }
   }
 })
