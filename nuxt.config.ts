@@ -46,7 +46,8 @@ export default {
     '~/plugins/vue-google-map',
     '~/plugins/vue-timepicker',
     '~/plugins/vue-croppie',
-    '~/plugins/vue-multiselect'
+    '~/plugins/vue-multiselect',
+    { src: '~/plugins/vue-fb-customer-chat.ts', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

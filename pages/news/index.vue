@@ -7,6 +7,7 @@
       <v-col v-for="(data, index) in news" :key="index" cols="12" md="4">
         <v-card
           max-width="374"
+          height="100%"
         >
           <v-carousel height="300" :show-arrows="false">
             <v-carousel-item
@@ -23,7 +24,12 @@
             </nuxt-link>
           </v-card-title>
           <v-card-text>
-            {{ data.description }}
+            <div class="text-truncate-5">
+              {{ data.description }}
+            </div>
+            <nuxt-link :to="`/news/${data.id}`" class="text-link d-flex justify-end text-right spacing-16">
+              อ่านต่อ
+            </nuxt-link>
           </v-card-text>
         </v-card>
       </v-col>

@@ -33,7 +33,7 @@
           </v-toolbar-title>
           <v-toolbar-title
             class="d-flex align-center px-3 nav-item"
-            :class="{'active' : $route.name === 'problems___th'}"
+            :class="{'active' : $route.name.includes('problems') && $route.name !== 'add-problems___th'}"
           >
             <nuxt-link to="/problems" class="nav-text text-decoration-none">
               วิเคราะห์ปัญหา

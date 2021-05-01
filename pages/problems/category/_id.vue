@@ -36,8 +36,12 @@
         />
       </v-col> -->
       <v-col v-if="previousProblem.length > 0" cols="12">
-        <div class="cursor-pointer" @click="onClickPrevious">
-          <v-icon>mdi-arrow-left</v-icon> <span>{{ previousProblem[previousProblem.length - 1] }}</span>
+        <div class="cursor-pointer">
+          <span
+            v-for="(problem, index) in previousProblem"
+            :key="index"
+            @click="onClickPrevious(index)"
+          >{{ index > 0 ? ` / ${problem}` : problem }}</span>
         </div>
       </v-col>
       <v-col cols="12">
@@ -46,31 +50,44 @@
             v-for="(problem, index) in problems"
             :key="index"
           >
-            <v-expansion-panel-header>
+            <v-expansion-panel-header class="text-h3">
               {{ problem.title }} ({{ problem.score }}) คะแนน
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-row>
                 <v-col cols="12">
-                  {{ problem.detail }}
+                  <div class="text-body-1">
+                    {{ problem.detail }}
+                  </div>
                 </v-col>
-                <v-col cols="6">
+                <v-col cols="12" class="text-center">
                   <CommonButton
+                    v-if="problem.childs.length > 0"
                     btn-text="ใช่"
                     color="primary"
-                    block
-                    depressed
-                    :disabled="!problem.childs.some(s => s.is_true)"
-                    @click="onClickChoice(problem.childs.find(s => s.is_true), problem)"
+                    outlined
+                    @click="onClickChoice(problem, true)"
                   />
-                </v-col>
-                <v-col cols="6">
                   <CommonButton
-                    text
+                    v-if="problem.childs.length > 0"
                     btn-text="ไม่ใช่"
-                    block
                     color="error"
+                    outlined
+                    @click="onClickChoice(problem, false)"
+                  />
+                  <CommonButton
+                    v-if="problem.childs.length <= 0"
+                    btn-text="เสร็จสิ้น"
+                    color="success"
+                    outlined
                     @click="showSolve(problem.title, problem.description, problem.id, problem.filename)"
+                  />
+                  <CommonButton
+                    v-if="problem.childs.length <= 0"
+                    btn-text="ไม่พบปัญหา"
+                    color="info"
+                    outlined
+                    @click="contactValue = true"
                   />
                 </v-col>
               </v-row>
@@ -93,6 +110,12 @@
       :text="confirmModalText"
       :link="link"
       @success="onClickSuccess"
+    />
+    <ConfirmModalComponent
+      v-model="contactValue"
+      title="แจ้งเตือน"
+      text="กรุณาติดต่อเจ้าหน้าที่ห้องทะเบียน"
+      @success="contactValue = false"
     />
   </div>
 </template>
@@ -125,6 +148,7 @@ export default defineComponent({
     }])
     const lastProblemID = ref<number>(0)
     const link = ref<string>('')
+    const contactValue = ref<boolean>(false)
 
     watch(() => sort.value, () => {
       fetchProblems()
@@ -146,10 +170,17 @@ export default defineComponent({
       }
     }
 
-    const onClickChoice = (nextProblem: any, currentProblem: any) => {
+    const onClickChoice = (problem: any, value: boolean) => {
+      const trueProblem = problem.childs.find((s: any) => s.is_true)
+      const falseProblem = problem.childs.find((s: any) => s.is_false)
+      if ((value && (!trueProblem && falseProblem)) || (!value && (trueProblem && !falseProblem))) {
+        showSolve(problem.title, problem.description, problem.id, problem.filename)
+        return
+      }
+      const currentProblem = problem
       previousProblem.value = [...previousProblem.value, currentProblem.title]
       previousProblemID.value = [...previousProblemID.value, currentProblem.id]
-      problemID.value = nextProblem.child_problem_id
+      problemID.value = trueProblem ? trueProblem.child_problem_id : falseProblem.child_problem_id
       search.value = ''
       if (currentProblem.is_head) {
         headID.value = currentProblem.id
@@ -157,10 +188,20 @@ export default defineComponent({
       fetchProblems()
     }
 
-    const onClickPrevious = () => {
-      problemID.value = previousProblemID.value.length === 1 ? '' : previousProblemID.value[previousProblemID.value.length - 1]
-      previousProblem.value.pop()
-      previousProblemID.value.pop()
+    const onClickPrevious = (index: number) => {
+      if (index === 0) {
+        problemID.value = ''
+        previousProblem.value = []
+        previousProblemID.value = []
+        fetchProblems()
+        return
+      }
+      if (index + 1 === previousProblemID.value.length) {
+        return
+      }
+      problemID.value = previousProblemID.value[index]
+      previousProblem.value = previousProblem.value.filter((_: any, i: number) => i <= index)
+      previousProblemID.value = previousProblemID.value.filter((_: any, i: number) => i <= index)
       search.value = ''
       fetchProblems()
     }
@@ -241,7 +282,8 @@ export default defineComponent({
       confirmModalValue,
       confirmModalTitle,
       confirmModalText,
-      link
+      link,
+      contactValue
     }
   }
 })

@@ -5,7 +5,7 @@
     </div>
     <v-row class="spacing-12">
       <v-col cols="12">
-        <v-carousel height="300" :show-arrows="false">
+        <v-carousel height="auto" :show-arrows="false">
           <v-carousel-item
             v-for="(img, index2) in images"
             :key="`${index2}-image-carousel`"
