@@ -50,7 +50,7 @@
             v-for="(problem, index) in problems"
             :key="index"
           >
-            <v-expansion-panel-header class="text-h3">
+            <v-expansion-panel-header class="text-h1">
               {{ problem.title }} ({{ problem.score }}) คะแนน
             </v-expansion-panel-header>
             <v-expansion-panel-content>
