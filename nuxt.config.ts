@@ -35,6 +35,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/node_modules/@fullcalendar/core/main.css',
+    '~/node_modules/@fullcalendar/daygrid/main.css',
     '~/assets/scss/main.scss'
   ],
 
@@ -47,7 +49,8 @@ export default {
     '~/plugins/vue-timepicker',
     '~/plugins/vue-croppie',
     '~/plugins/vue-multiselect',
-    { src: '~/plugins/vue-fb-customer-chat.ts', ssr: false }
+    { src: '~/plugins/vue-fb-customer-chat.ts', ssr: false },
+    { src: '~/plugins/full-calendar', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

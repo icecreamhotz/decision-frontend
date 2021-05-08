@@ -47,6 +47,14 @@
               เพิ่มปัญหา
             </nuxt-link>
           </v-toolbar-title>
+          <v-toolbar-title
+            class="d-flex align-center px-3 nav-item"
+            :class="{'active' : $route.name === 'calendar___th'}"
+          >
+            <nuxt-link to="/calendar" class="nav-text text-decoration-none">
+              ปฏิทิน
+            </nuxt-link>
+          </v-toolbar-title>
         </div>
       </div>
     </v-app-bar>
@@ -94,6 +102,12 @@
               <v-icon>mdi-account-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-title>เพิ่มปัญหา</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/calendar">
+            <v-list-item-icon>
+              <v-icon>mdi-calendar-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>ปฏิทิน</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
