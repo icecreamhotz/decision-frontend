@@ -3,7 +3,7 @@
     <v-app-bar color="primary">
       <div class="h-100 w-100 d-flex d-md-none justify-space-between align-center">
         <v-app-bar-nav-icon @click="drawer = true" />
-        <v-img src="/images/logo.png" max-width="90" max-height="70" class="logo-navbar" />
+        <div>Decision System</div>
         <a href="https://line.me/ti/p/EdVPqFEnWH " target="_blank"><img class="nav-text" src="/images/line_icon.svg" width="40px" height="auto"></a>
       </div>
 
@@ -54,6 +54,58 @@
             <nuxt-link to="/calendar" class="nav-text text-decoration-none">
               ปฏิทิน
             </nuxt-link>
+          </v-toolbar-title>
+          <v-toolbar-title
+            class="d-flex align-center px-3 nav-item white--text"
+          >
+            <v-menu
+              left
+              bottom
+            >
+              <template #activator="{ on, attrs }">
+                <span
+                  class="nav-text"
+                  v-bind="attrs"
+                  v-on="on"
+                >สถิติ</span>
+              </template>
+
+              <v-list>
+                <v-list-item>
+                  <v-list-item-title>
+                    <nuxt-link
+                      to="/system-stat"
+                      class="nav-text text-decoration-none black--text"
+                      :class="{'primary--text' : $route.name === 'system-stat___th'}"
+                    >
+                      สถิติความถึงพอใจระบบ
+                    </nuxt-link>
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <nuxt-link
+                      to="/system-problem"
+                      class="nav-text text-decoration-none black--text"
+                      :class="{'primary--text' : $route.name === 'system-problem___th'}"
+                    >
+                      สถิติวิธีการแก้ไขปัญหา
+                    </nuxt-link>
+                  </v-list-item-title>
+                </v-list-item>
+                <v-list-item>
+                  <v-list-item-title>
+                    <nuxt-link
+                      to="/system-popular"
+                      class="nav-text text-decoration-none black--text"
+                      :class="{'primary--text' : $route.name === 'system-popular___th'}"
+                    >
+                      สถิติปัญหาที่พบบ่อย
+                    </nuxt-link>
+                  </v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </v-toolbar-title>
         </div>
       </div>
@@ -108,6 +160,24 @@
               <v-icon>mdi-calendar-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-title>ปฏิทิน</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/system-stat">
+            <v-list-item-icon>
+              <v-icon>mdi-cellphone-arrow-down</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>สถิติความถึงพอใจระบบ</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/system-problem">
+            <v-list-item-icon>
+              <v-icon>mdi-cellphone-arrow-down</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>สถิติวิธีการแก้ไขปัญหา</v-list-item-title>
+          </v-list-item>
+          <v-list-item to="/system-popular">
+            <v-list-item-icon>
+              <v-icon>mdi-cellphone-arrow-down</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>สถิติปัญหาที่พบบ่อย</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
       </v-list>
