@@ -93,7 +93,7 @@ export default {
     async k () {
       this.isHidden = false
       try {
-        const dd = await this.$axios.get(`/problems?problem_category_id=${this.problem}`)
+        const dd = await this.$axios.get(`/problems?problem_category_id=${this.problem}&is_report=1`)
         const data = dd.data.data
         this.chartData.labels = data.map(d => d.title)
         this.chartData.datasets[0].data = data.map(d => d.view)
